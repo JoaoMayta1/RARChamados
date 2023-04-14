@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Formulário de Ordem de Serviço</title>
+  <title>Solicitar ordem de Serviço</title>
   <!-- Inclua aqui o link para o arquivo JavaScript do Firebase -->
 
     <link rel="stylesheet" href="css/bootstrap.css">
@@ -107,6 +107,12 @@
     }      // Função para enviar a ordem de serviço para o Firebase
       function enviarOrdem(event) {
         event.preventDefault();
+        
+        var urlParams = new URLSearchParams(window.location.search);
+        var empresa = urlParams.get('razaoSocialTitulo');
+
+        var dataHora = new Date().toLocaleString();
+
 
         var nomeSolicitante = document.getElementById('nomeSolicitante').value;
         var tipoRelato = document.getElementById('tipoRelato').value;
@@ -124,8 +130,10 @@
         // Monta o objeto de ordem de serviço
         var ordemServico = {
           nomeSolicitante: nomeSolicitante,
+          empresa: empresa,
           tipoRelato: tipoRelato,
           problemaRelatado: problemaRelatado,
+          dataHora:dataHora,
           equipamentosSelecionados: equipamentosSelecionados
         };
 

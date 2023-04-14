@@ -6,7 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <!-- Meta tag para tornar a página compatível com smartphones -->
 
-  <title>Página de Login</title>
+  <title>Selecionar Impressoras</title>
 
   <link rel="stylesheet" href="css/bootstrap.css">
 
@@ -98,7 +98,7 @@
           snapshot.forEach(function (childSnapshot) {
             var contrato = childSnapshot.val();
             if (primeiraRazaoSocial === '') {
-              primeiraRazaoSocial = contrato.Razao_Social;
+              primeiraRazaoSocial = contrato.Nome_Fantasia;
               document.getElementById('razaoSocialTitulo').textContent = primeiraRazaoSocial;
             }
 
@@ -135,7 +135,9 @@
       // Redireciona para a nova página com as informações dos equipamentos selecionados
       if (equipamentosSelecionados.length > 0) {
         var equipamentosJson = JSON.stringify(equipamentosSelecionados);
-        window.location.href = 'nova_pagina.html?equipamentos=' + encodeURIComponent(equipamentosJson);
+        var nome = document.getElementById("razaoSocialTitulo").innerText;
+        window.location.href = 'nova_pagina.html?razaoSocialTitulo=' + encodeURIComponent(nome) +
+          '&equipamentos=' + encodeURIComponent(equipamentosJson);
       } else {
         alert('Nenhum equipamento selecionado.');
       }
